@@ -3,20 +3,20 @@
   <title>OpenAI Quickstart</title>
   <link
     rel="shortcut icon"
-    href="{{ url_for('static', filename='book.PNG') }}"
+    href="{{ url_for('static', filename='cap.PNG') }}"
   />
   <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}" />
 </head>
 
 <body>
-  <img src="{{ url_for('static', filename='book.PNG') }}" class="icon" />
-  <h3>Reflection assessor</h3>
-  <h5>Enter a reflection on one of the textbook chapters below. OpenAI will assess your response in terms of 1) spelling and grammar and 2) the overall quality of your reflection.</h5>
+  <img src="{{ url_for('static', filename='cap.PNG') }}" class="icon" />
+  <h3>Career Path Advisor</h3>
+  <h5>Enter a list of soft/hard skills you possess. OpenAI will assess your response and provide you with career path options.</h5>
   <form action="/" method="post">
-    <textarea name="reflection" placeholder="Enter your reflection" required /></textarea>
-    <input type="submit" value="Provide reflection" />
+    <textarea name="skills" placeholder="Enter your skills" value="Python, Mathematics, Chess, Java" required /></textarea>
+    <input type="submit" value="Provide career path" />
   </form>
   {% if result %}
-  <div class="result">{{ result }}</div>
+  <div class="result">{{ result|safe }}</div>
   {% endif %}
 </body>

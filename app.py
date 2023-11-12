@@ -2,6 +2,8 @@ import os
 
 from flask import Flask, redirect, render_template, request, url_for
 from openai import OpenAI
+api_key=os.environ.get(".env")
+print(api_key)
 client = OpenAI(
     api_key=os.environ.get(".env"),
 )
@@ -12,12 +14,12 @@ app = Flask(__name__)
 @app.route("/", methods=("GET", "POST"))
 def index():
     if request.method == "POST":
-        reflection = request.form["reflection"]
+        reflection = request.form["skills"]
         response = client.chat.completions.create(
             model="gpt-3.5-turbo",
             temperature=0.6,
             messages=[
-                {"role": "system","content": "Students will provide you with short reflections on emerging trends in the business world. Evaluate the reflections in terms of spelling and grammar, and in terms of evidence of critical thought. Provide a grade between 0 and 10, where 0 represents a very poor response and 10 represents a fantastic response."},
+                {"role": "system","content": "Students will provide you with a list of soft and hard skills that they posses. In an HTML table without showing Markdown code like ```html, provide a list of career paths they can choose or transition to. Only include the HTML table in your response."},
                 {"role": "user", "content": reflection}
             ]
         )
